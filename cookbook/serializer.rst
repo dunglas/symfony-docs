@@ -103,9 +103,11 @@ Here is an example on how to load the
 
 .. note::
 
-    The :class:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer`
-    is broken by design. As soon as you have a circular object graph, an
-    infinite loop is created when calling the getters. You're encouraged
-    to add your own normalizers that fit your use-case.
+    Since Symfony 2.6, the :class:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer`
+    handles circular references. 
+    Before that version, that class was broken by design. As soon as you had a
+    circular object graph, an infinite loop was created when calling the getters.
+    If you use an old version of Symfony, you're encouraged to upgrade or to add
+    your own normalizers that fit your use-case.
 
 .. _JMSSerializerBundle: http://jmsyst.com/bundles/JMSSerializerBundle
