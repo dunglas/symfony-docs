@@ -430,10 +430,31 @@ Use :method:`Symfony\\Component\\Process\\Process::disableOutput` and
         The ability to pass a callback to these methods when output is disabled
         was introduced in Symfony 3.1.
 
+Finding an Executable
+---------------------
+
+The Process Component component provides a utility class called
+:class:`Symfony\\Component\\Process\\ExecutableFinder` which returns the
+absolute path of an executable available on your server::
+
+    use Symfony\Component\Process\ExecutableFinder;
+
+    $executableFinder = new ExecutableFinder();
+    $chromedriverPath = $executableFinder->find('chromedriver');
+    // $phpBinaryPath = '/usr/local/bin/chromedriver' (the result will be different on your computer)
+
+The :method:`Symfony\Component\Process\ExecutableFinder::find` method also takes extra parameters to specify a default value
+to return and extra directories where to look for the executable::
+
+    use Symfony\Component\Process\ExecutableFinder;
+
+    $executableFinder = new ExecutableFinder();
+    $chromedriverPath = $executableFinder->find('chromedriver', '/path/to/chromedriver', ['local-bin/']);
+
 Finding the Executable PHP Binary
 ---------------------------------
 
-This component also provides a utility class called
+This component also provides a special utility class called
 :class:`Symfony\\Component\\Process\\PhpExecutableFinder` which returns the
 absolute path of the executable PHP binary available on your server::
 
